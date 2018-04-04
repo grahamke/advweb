@@ -1,4 +1,4 @@
 # advweb
-Advance Web Developer Bootcamp
+Advanced Web Developer Bootcamp
 
-Code from Colt Steele's Advance Web Developer Bootcamp
+Code from Colt Steele's Advanced Web Developer Bootcamp
