@@ -38,6 +38,7 @@ function sumEvenArguments(){
     }, 0);
 }
 
+console.log("sumEvenArguments");
 console.log(sumEvenArguments(1,2,3,4)); // 6
 console.log(sumEvenArguments(1,2,6)); // 8
 console.log(sumEvenArguments(1,2)); // 2
@@ -63,7 +64,7 @@ function invokeMax(fn, num){
   var counter = 0;
   return function() {
     if(counter >= num) {
-      return "Maxed Out";
+      return "Maxed Out!";
     }
     counter++;
     return fn.apply(this,arguments);
@@ -73,7 +74,7 @@ function invokeMax(fn, num){
 function add(a,b){
     return a+b
 }
-
+console.log("invokeMax");
 var addOnlyThreeTimes = invokeMax(add,3);
 console.log(addOnlyThreeTimes(1,2));  // 3
 console.log(addOnlyThreeTimes(2,2));  // 4
@@ -120,6 +121,8 @@ function once(fn, thisArg){
     }
   }
 }
+
+console.log("once");
 
 function add(a,b){
     return a+b
@@ -174,16 +177,15 @@ Examples:
 */
 
 function bind(fn, thisArg){
-  return function inner() {
-    var outerArgs = [].slice.call(arguments,2);
-    return function() {
-      var innerArgs = [].slice.call(arguments);
-      var allArgs = outerArgs.concat(innerArgs);
-      return fn.apply(thisArg, allArgs);
-    }
+  var outerArgs = [].slice.call(arguments,2)
+  return function(){
+      var innerArgs = [].slice.call(arguments)
+      var allArgs = outerArgs.concat(innerArgs)
+      return fn.apply(thisArg, allArgs)
   }
 }
 
+console.log("bind");
 function firstNameFavoriteColor(favoriteColor){
     return this.firstName + "'s favorite color is " + favoriteColor
 }
@@ -259,3 +261,31 @@ function flip(fn, thisArg){
     return fn.apply(thisArg, allArgs.reverse());
   }
 }
+
+function personSubtract(a,b,c){
+    return this.firstName + " subtracts " + (a-b-c);
+}
+
+var person = {
+    firstName: 'Elie'
+}
+
+var flipFn = flip(personSubtract, person);
+flipFn(3,2,1) // "Elie subtracts -4"
+
+var flipFn2 = flip(personSubtract, person, 5,6);
+flipFn2(7,8) // "Elie subtracts -4"
+
+function subtractFourNumbers(a,b,c,d){
+    return a-b-c-d;
+}
+
+console.log("flip");
+console.log(flip(subtractFourNumbers,this,1)(2,3,4)); // -2
+console.log(flip(subtractFourNumbers,this,1,2)(3,4)); // -2
+console.log(flip(subtractFourNumbers,this,1,2,3)(4)); // -2
+console.log(flip(subtractFourNumbers,this,1,2,3,4)()); // -2
+console.log(flip(subtractFourNumbers,this)(1,2,3,4)); // -2
+console.log(flip(subtractFourNumbers,this,1,2,3)(4,5,6,7)); // -2
+console.log(flip(subtractFourNumbers,this)(1,2,3,4,5,6,7,8,9,10)); // -2
+console.log(flip(subtractFourNumbers,this,11,12,13,14,15)(1,2,3,4,5,6,7,8,9,10)); // -22
