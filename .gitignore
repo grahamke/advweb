@@ -62,3 +62,10 @@ typings/
 .next
 
 guess_the_password/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
