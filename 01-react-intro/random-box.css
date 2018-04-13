@@ -1,0 +1,14 @@
+#app {
+  display: flex;
+  flex-direction: row;
+}
+
+.box {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 500px;
+  background-color: goldenrod;
+}
